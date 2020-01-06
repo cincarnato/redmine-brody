@@ -1,0 +1,104 @@
+<% if deal_statuses.any? %>
+  <% if User.current.allowed_to?(:edit_deals, @project) %>
+    <script>
+      $(function() {
+
+        $(".deal-status-col").droppable({
+            activeClass: 'droppable-active',
+            hoverClass: 'droppable-hover',
+            accept: '.deal-card',
+            tolerance: 'pointer',
+            drop: function (event, ui) {
+                ui.draggable.prependTo(this);
+                $.ajax({
+                  url: '<%= escape_javascript deals_path %>/' + ui.draggable.data('id'),
+                  type: 'PUT',
+                  dataType : "script",
+                  data: {
+                    deal: {status_id: $(this).data("id")},
+                    status_id: $("#operators_status_id").val()
+                  },
+                  success: function(data){
+
+                  }
+                });
+            }
+        });
+
+        $(".deal-card").draggable({
+          containmentType: "parent",
+          helper: "clone",
+          start: function (event, ui) {
+            $(ui.helper).addClass("draggable-active")
+          }
+        });
+
+        // $(".deal-status-col" ).sortable({
+        //   connectWith: ".deal-status-col",
+        //   placeholder: "sortable-placeholder",
+        //   receive: function (event, ui) {
+        //       var deal_id = ui.item.data('id');
+        //       var status_id = $(this).data("id");
+        //       $.ajax({
+        //          url: '<%= escape_javascript deals_path %>/' + deal_id + '.json',
+        //          dataType : "json",
+        //          type: 'PUT',
+        //          data: {deal: {status_id: status_id}}
+        //       });
+        //   }
+        // }).disableSelection();
+
+      });
+    </script>
+  <% end %>
+
+  <%= form_tag({}, :data => {:cm_url => context_menu_deals_path}) do -%>
+    <%= hidden_field_tag 'back_url', url_for(params.respond_to?(:to_unsafe_hash) ? params.to_unsafe_hash : params) %>
+    <%= hidden_field_tag 'project_id', @project.id if @project %>
+    <% board_statuses = params[:status_id] == 'o' ? deal_statuses.open : deal_statuses %>
+  <div class="autoscroll">
+      <table class="list deal-board ">
+        <thead class="deals_counts">
+          <%= render :partial => 'board_deals_counts' %>
+        </thead>
+        <tr style="text-align: center;white-space: nowrap;" class="deal <%= cycle('odd', 'even') %>">
+
+        <% board_statuses.each do |deal_status| %>
+          <td class="deal-status-col <%='open' if deal_status.is_open? %> <%='won' if deal_status.is_won? %> <%='lost' if deal_status.is_lost? %> <%='closed' if deal_status.is_closed? %>" data-id="<%= deal_status.id %>">
+          <% @deals.where(:status_id => deal_status.id).order("#{Deal.table_name}.updated_on DESC").each do |deal| %>
+          <div class="deal-card" data-id="<%= deal.id %>">
+              <p class="amount">
+                <strong><%= deal.price_to_s %></strong>
+                  <%= content_tag(:span, " (#{deal.probability}%)" ) if deal.probability  %>
+              </p>
+              <p class="name" ><%= link_to deal.name, deal_path(deal) %></p>
+              <% if deal.contact %>
+              <p class="info">
+                <span class="contact"><%= contact_tag(deal.contact) %></span>
+              </p>
+              <% end %>
+          </div>
+          <% end %>
+          </td>
+
+          <% end %>
+        </tr>
+
+        <thead class="total">
+          <%= render :partial => 'board_total' %>
+        <!-- <tr>
+          <% board_statuses.each do |deal_status| %>
+          <th style="width: <%= 100/board_statuses.size %>%;" data-id="<%= deal_status.id %>">
+            <%=  prices_collection_by_currency(@deals_scope.group(:currency).where(:status_id => deal_status.id).sum(:price), :hide_zeros => true).join('<br/>').html_safe %>
+          </th>
+          <% end %>
+        </tr> -->
+        </thead>
+
+      </table>
+  </div>
+
+  <% end %>
+<% else %>
+  <p class="nodata"><%= l(:text_crm_no_deal_statuses_in_project) %></p>
+<% end %>

@@ -1,0 +1,27 @@
+<h3><%= l(:label_crm_my_deal_plural) %></h3>
+<% deals = Deal.visible.open.where(:assigned_to_id  => User.current.id).limit(20) %>
+
+<div class="box" id="duplicates">
+	<ul>
+	  <% deals.each do |deal| %>
+		<li>
+			<%= deal_tag(deal) %>
+    </li>
+		<% end %>
+	</ul>
+</div>
+
+<% if deals.length > 0 %>
+	<p class="small"><%= link_to l(:label_crm_deal_view_all),
+						 :controller => 'deals',
+						 :action => 'index',
+						 :set_filter => 1,
+						 :fields => ["assigned_to_id", "status_id"],
+						 :operators => {"assigned_to_id"=>"=", "status_id" => "o"},
+						 :values => {"assigned_to_id" => ["me"]} %></p>
+<% end %>
+
+<% content_for(:header_tags) do %>
+	<%= javascript_include_tag :contacts, :plugin => 'redmine_contacts'  %>
+  	<%= stylesheet_link_tag :contacts, :plugin => 'redmine_contacts' %>
+<% end %>

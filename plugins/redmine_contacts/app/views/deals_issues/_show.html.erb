@@ -1,0 +1,5 @@
+<% if issue && issue.deal && issue.deal.visible? %>
+		<%= issue_fields_rows do |rows|
+			rows.left l(:label_deal), deal_tag(issue.deal).html_safe
+		end%>
+<% end %>

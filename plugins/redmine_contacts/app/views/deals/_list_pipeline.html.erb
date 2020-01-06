@@ -1,0 +1,45 @@
+<% if deal_statuses.any? %>
+<%  @deals = @query.results_scope(
+        :include => [{:contact => [:avatar, :projects, :address]}, :author]
+      )
+    @processor = DealsPipelineProcessor.new(@deals) %>
+<div class="autoscroll">
+  <table class="list sales-funnel">
+    <thead>
+    <tr>
+      <th><%= h l(:label_crm_deal_status) %></th>
+      <th><%= h l(:label_crm_count) %></th>
+      <th><%= h l(:label_total) %></th>
+    </tr>
+    </thead>
+
+    <% deal_statuses.each_with_index do |deal_status, index| %>
+      <% status_scope = @processor.deals_for_status(deal_status) %>
+      <tr class="deal_status_type-<%= deal_status.status_type %>">
+        <td class="sales-funnel index_<%= deal_status.is_lost? ? 1 : index.to_s %>" >
+          <%= pipeline_status_tag(deal_status, status_scope.count, index) %>
+        </td>
+        <td class="count">
+          <strong>
+            <%= h status_scope.size %>
+          </strong>
+        </td>
+        <td class="total">
+          <strong>
+            <%= pipeline_prices(status_scope) %>
+          </strong>
+        </td>
+      </tr>
+    <% end %>
+    <tr class="total">
+      <th colspan="2" class="title" style="text-align: right;"> <%= "#{l(:label_total)} (#{@processor.count}):" %> </th>
+      <th class="sum" style="text-align: right;">
+        <%= pipeline_prices(@processor.scope) %>
+      </th>
+    </tr>
+
+  </table>
+</div>
+<% else %>
+  <p class="nodata"><%= l(:text_crm_no_deal_statuses_in_project) %></p>
+<% end %>

@@ -1,0 +1,11 @@
+$('#import-progress').progressbar({value: <%= @current.to_i %>});
+$('#progress-label').text("<%= @current.to_i %> / <%= @import.total_items.to_i %>");
+
+<% if @import.finished? %>
+  window.location.href='<%= importer_show_link(@import, @project) %>';
+<% else %>
+  $.ajax({
+    url: '<%= importer_run_link(@import, @project) %>',
+    type: 'post'
+  });
+<% end %>

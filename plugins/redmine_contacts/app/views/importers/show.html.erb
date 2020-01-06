@@ -1,0 +1,26 @@
+<h2><%= l(:label_crm_csv_import) %></h2>
+
+<% if @import.unsaved_items.count == 0 %>
+  <p><%= l(:notice_import_finished, :count => @import.saved_items.count) %></p>
+
+  <ol>
+  <% @import.saved_objects.each do |imported_object| %>
+    <li><%= importer_link_to_object imported_object %></li>
+  <% end %>
+  </ul>
+<% else %>
+  <p><%= l(:notice_import_finished_with_errors, :count => @import.unsaved_items.count, :total => @import.total_items) %></p>
+
+  <table id="unsaved-items" class="list">
+    <tr>
+      <th>Position</th>
+      <th>Message</th>
+    </tr>
+  <% @import.unsaved_items.each do |item| %>
+    <tr>
+      <td><%= item.position %></td>
+      <td><%= simple_format_without_paragraph item.message %></td>
+    </tr>
+  <% end %>
+  </table>
+<% end %>

@@ -1,0 +1,51 @@
+<div class="splitcontent">
+  <div class="splitcontentleft">
+    <p>
+      <label><%= l(:field_deal_name) %></label>
+      <%= mapping_select_tag @import, 'name', :required => true %>
+    </p>
+    <p>
+      <label><%= l(:field_deal_background) %></label>
+      <%= mapping_select_tag @import, 'background' %>
+    </p>
+    <p>
+      <label><%= l(:field_currency) %></label>
+      <%= mapping_select_tag @import, 'currency' %>
+    </p>
+    <p>
+      <label><%= l(:field_deal_price) %></label>
+      <%= mapping_select_tag @import, 'price' %>
+    </p>
+
+    <% @custom_fields.each do |field| %>
+      <p>
+        <label><%= field.name %></label>
+        <%= mapping_select_tag @import, "cf_#{field.id}" %>
+      </p>
+    <% end %>
+  </div>
+
+  <div class="splitcontentright">
+    <p>
+      <label><%= l(:label_crm_probability) %></label>
+      <%= mapping_select_tag @import, 'probability' %>
+    </p>
+    <p>
+      <label><%= l(:field_contact_status) %></label>
+      <%= mapping_select_tag @import, 'status' %>
+    </p>
+    <p>
+      <label><%= l(:field_contact) %></label>
+      <%= mapping_select_tag @import, 'contact' %>
+    </p>
+    <p>
+      <label><%= l(:label_crm_assigned_to) %></label>
+      <%= mapping_select_tag @import, 'assigned_to' %>
+    </p>
+    <p>
+      <label><%= l(:field_category) %></label>
+      <%= mapping_select_tag @import, 'category' %>
+    </p>
+  </div>
+</div>
+

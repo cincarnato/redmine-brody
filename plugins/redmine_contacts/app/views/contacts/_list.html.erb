@@ -1,0 +1,44 @@
+<%= form_tag({}, :data => {:cm_url => context_menu_contacts_path}) do %>
+<%= hidden_field_tag 'back_url', url_for(params.respond_to?(:to_unsafe_hash) ? params.to_unsafe_hash : params) %>
+<%= hidden_field_tag 'project_id', @project.id if @project %>
+<div class="autoscroll">
+  <table class="list contacts">
+    <thead>
+      <tr>
+        <th class="checkbox hide-when-print">
+          <%= link_to image_tag('toggle_check.png'), {}, :onclick => 'toggleCRMIssuesSelection(this); return false;',
+                                                           :title => "#{l(:button_check_all)}/#{l(:button_uncheck_all)}" %>
+        </th>
+        <% @query.columns.each do |column| %>
+          <%= Redmine::VERSION.to_s >= '3.4' || RedmineContacts.unstable_branch? ? column_header(@query, column) : column_header(column) %>
+        <% end %>
+      </tr>
+    </thead>
+
+  <% previous_group = false %>
+  <tbody>
+  <% @contacts.each do |contact| -%>
+    <% if @query.grouped? && (group = @query.group_by_column.value(contact)) != previous_group %>
+      <% reset_cycle %>
+      <tr class="group open">
+        <td colspan="<%= @query.columns.size + 2 %>">
+          <span class="expander" onclick="toggleRowGroup(this);">&nbsp;</span>
+          <%= group.blank? ? l(:label_none) : column_content(@query.group_by_column, contact) %> <span class="count">(<%= @contact_count_by_group[group] %>)</span>
+          <%= link_to_function("#{l(:button_collapse_all)}/#{l(:button_expand_all)}", "toggleAllRowGroups(this)", :class => 'toggle-all') %>
+        </td>
+      </tr>
+      <% previous_group = group %>
+    <% end %>
+
+
+    <tr id="contact-<%= h(contact.id) %>" class="contact <%= 'company' if contact.is_company %> hascontextmenu <%= cycle('odd', 'even') %>">
+
+      <td class="checkbox hide-when-print"><%= check_box_tag("selected_contacts[]", contact.id, false, :id => nil) %></td>
+      <% @query.columns.each do |column| %><%= content_tag 'td', column_content(column, contact), :class => column.css_classes %><% end %>
+    </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+ </div>
+<% end %>

@@ -1,0 +1,8 @@
+api.array :deal_categories, api_meta(:total_count => @categories.count) do
+  @categories.each do |category|
+    api.category do
+  	  api.id category.id
+      api.name category.name
+    end
+  end
+end

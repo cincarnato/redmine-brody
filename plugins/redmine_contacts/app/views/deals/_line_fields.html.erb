@@ -1,0 +1,45 @@
+<% product = f.object.product %>
+<tr class="line fields sortable-line" id="line-<%= f.object.id %>" >
+  <% unless product.blank? %>
+    <td class="product-image"><%= product_tag(product, :size => 32, :type => 'image')  %></td>
+  <% end %>
+  <td class="item" colspan="<%= product.blank? ? 2 : 1 %>">
+    <%= product_tag(product, :type => 'plain') unless product.blank? %>
+    <%= f.hidden_field :product_id %>
+    <% if !product.blank? && f.object.description.blank? %>
+      <br>
+      <em class="info"><%= link_to_function "(#{l(:label_products_add_description)})", "$(this).hide(); $(this).parent().next().show(); return false;"  %></em>
+    <% end %>
+    <%= f.text_area :description, :no_label => true, :rows => f.object.description.blank? ? 2 : [f.object.description.lines.count, 2].max, :onkeyup => "activateTextAreaResize(this);", :style => "width:99%; #{(product.blank? || !f.object.description.blank?) ? "" : "display:none;"}" -%>
+  </td>
+  <% f.object.custom_field_values.each do |cf| %>
+    <td><%= custom_field_tag("deal[lines_attributes][#{f.index}]", cf) %></td>
+  <% end %>
+  <td class="quantity"><%= f.text_field :quantity, :no_label => true, :size => 6, :onkeyup => 'updateTotal(this)' %></td>
+  <td class="price"><%= f.text_field :price, :no_label => true, :size => 8, :onkeyup => 'updateTotal(this)' %></td>
+
+  <% if !ContactsSetting.disable_taxes? || (f.object.container.respond_to?(:has_taxes?) && f.object.container.has_taxes?)  %>
+  <td class="tax">
+    <% line_tax = (f.object.new_record? && f.object.tax.blank?) ? ContactsSetting.default_tax : f.object.tax %>
+    <%= check_box_tag :show_tax, "1", false, :onclick=>"$(this).hide(); $(this).parent().find('.tax-fields').show(); $(this).next().find('input').focus(); return false;" if line_tax.blank? || line_tax == 0 %>
+    <span class="tax-fields" style="white-space: nowrap; <%= line_tax.blank? || line_tax == 0 ? "display:none;" : "" %>"><%= f.text_field :tax, :no_label => true, :size => 5, :value => line_tax %>&nbsp;%
+    </span>
+  </td>
+  <% end %>
+  <td class="discount">
+    <%= check_box_tag :show_discount, "1", false, :onclick=>"$(this).hide(); $(this).parent().find('.discount-fields').show(); $(this).next().find('input').focus(); return false;" if f.object.discount.to_i == 0 %>
+    <span class="discount-fields" style="white-space: nowrap; <%= f.object.discount.to_i == 0 ? "display:none;" : "" %>">
+      <%= f.text_field :discount, :no_label => true, :size => 5, :style => f.object.discount.to_i == 0 ? "display:none;" : "", :onkeyup => 'updateTotal(this)', :class => "discount-fields" %>&nbsp;%
+    </span>
+  </td>
+
+  <td class="total"><%= format("%.2f\n", f.object.total) if f.object.price && f.object.quantity  %></td>
+  <td>
+    <%= deals_link_to_remove_fields "", f, :class => "icon icon-del"  %>
+  </td>
+  <%= f.hidden_field :position, :class => 'position' %>
+</tr>
+
+<script type="text/javascript">
+  tooglePriceField();
+</script>

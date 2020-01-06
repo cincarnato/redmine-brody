@@ -1,0 +1,153 @@
+<% filtered_params = params.respond_to?(:to_unsafe_hash) ? params.to_unsafe_hash : params %>
+<div class="contextual">
+  <%= link_to l(:label_crm_deal_new), {:controller => 'deals', :action => 'new', :project_id => @project || Deal.allowed_target_projects.first }, :class => 'icon icon-add' if User.current.allowed_to?(:add_deals, @project, {:global => true}) && Deal.allowed_target_projects.any? %>
+  <%= link_to_if_authorized l(:label_crm_import), {:controller => 'deal_imports', :action => 'new', :project_id => @project}, :class => 'icon icon-import', :id => 'import_from_csv' %>
+</div>
+
+<% html_title(@query.new_record? ? l(:label_deal_plural) : @query.name) %>
+
+<%= form_tag({ :controller => 'deals', :action => 'index', :project_id => @project }, :method => :get, :id => 'query_form') do %>
+
+    <script type="text/javascript">
+       jQuery(function($) {
+          // when the #search field changes
+          $("#search").observe_field(2, function() {
+            var form = $("#query_form"); // grab the form wrapping the search bar.
+            var url = form.attr("action");
+            form.find('[name="c[]"] option').each(function(i, elem){
+              $(elem).attr('selected', true);
+            });
+
+            var formData = form.serialize();
+            form.find('[name="c[]"] option').each(function(i, elem){
+              $(elem).attr('selected', false);
+            });
+
+            $.get(url, formData, function(data) { // perform an AJAX get, the trailing function is what happens on successful get.
+                $("#contact_list").html(data); // replace the "results" div with the result of action taken
+            });
+          });
+        });
+    </script>
+
+    <h2 class="contacts_header">
+        <span id='scope_header' class="scope_title">
+        <%= @query.new_record? ? l(:label_deal_plural) : h(@query.name)  %>
+        </span>
+
+        <span class="live_search">
+            <%= text_field_tag(:search, params[:search], :autocomplete => "off", :class => "live_search_field", :placeholder => l(:label_crm_contact_search) ) %>
+
+        </span>
+
+    </h2>
+<%= hidden_field_tag 'set_filter', '1' %>
+<%= hidden_field_tag 'object_type', 'deal' %>
+<div id="query_form_content" class="hide-when-print">
+  <fieldset id="filters" class="collapsible <%= @query.new_record? ? "" : "collapsed" %>">
+    <legend onclick="toggleFieldset(this);"><%= l(:label_filter_plural) %></legend>
+    <div style="<%= @query.new_record? ? "" : "display: none;" %>">
+      <%= render :partial => 'queries/filters', :locals => {:query => @query} %>
+    </div>
+  </fieldset>
+  <fieldset class="collapsible collapsed">
+    <legend onclick="toggleFieldset(this);"><%= l(:label_options) %></legend>
+    <div style="display: none;">
+      <table>
+        <tr style="<%= 'display: none;' if deals_list_style != 'list' %>">
+          <td><%= l(:field_column_names) %></td>
+          <td><%= render_query_columns_selection(@query) %></td>
+        </tr>
+        <tr>
+        <% if ['list', 'list_excerpt'].include?(deals_list_style) %>
+            <td><label for='group_by'><%= l(:field_group_by) %></label></td>
+            <td><%= select_tag('group_by',
+                               options_for_select(
+                                 [[]] + @query.groupable_columns.collect {|c| [c.caption, c.name.to_s]},
+                                 @query.group_by)
+                       ) %></td>
+        <% end %>
+        <% if deals_list_style == 'list_excerpt' %>
+            <td><label for='sort'><%= l(:label_sort) %></label></td>
+            <td><%= select_tag('sort',
+                               options_for_select(
+                                 [[]] +
+                                 [[l(:field_contact_status), "status:asc"],
+                                  [l(:field_due_date), "due_date:asc"],
+                                  [l(:field_created_on), "created_on:desc"],
+                                  [l(:field_updated_on), "updated_on:desc"]],
+                                 params[:sort] || @query.sort_criteria.try(:first).try(:join, ':'))
+                       ) %></td>
+        <% end %>
+
+        </tr>
+        <%= call_hook(:view_deals_index_query_options, :deals => @deals, :query => @query) %>
+        <tr>
+          <td><label for='deals_list_style'><%= l(:label_crm_list_partial_style) %></label></td>
+          <td><%= select_tag('deals_list_style', options_for_select(deal_list_styles_for_select, deals_list_style)) %></td>
+        </tr>
+      </table>
+    </div>
+  </fieldset>
+</div>
+
+<%= render :partial => "crm_calendars/buttons" if deals_list_style == 'crm_calendars/crm_calendar' %>
+
+<p class="buttons hide-when-print">
+  <%= link_to_function l(:button_apply), 'submit_query_form("query_form")', :class => 'icon icon-checked' %>
+  <%= link_to l(:button_clear), { :set_filter => 1, :project_id => @project }, :class => 'icon icon-reload'  %>
+  <% if @query.new_record? %>
+    <% if User.current.allowed_to?(:save_contacts_queries, @project, :global => true) %>
+      <%= link_to_function l(:button_save),
+                           "$('#query_form').attr('action', '#{ @project ? new_project_crm_query_path(@project) : new_crm_query_path }'); submit_query_form('query_form')",
+                           :class => 'icon icon-save' %>
+    <% end %>
+  <% else %>
+    <% if @query.editable_by?(User.current) %>
+      <%= link_to l(:button_contacts_edit_query), edit_crm_query_path(@query, :object_type => "deal"), :class => 'icon icon-edit' %>
+      <%= link_to l(:button_contacts_delete_query), crm_query_path(@query, :object_type => "deal"), :data => {:confirm => l(:text_are_you_sure)}, :method => :delete, :class => 'icon icon-del' %>
+    <% end %>
+  <% end %>
+</p>
+<% end %>
+
+<%= error_messages_for 'query' %>
+<% if @query.valid? %>
+  <div id="contact_list" class="deal_list">
+  <% if @deals.empty? %>
+    <p class="nodata"><%= l(:label_no_data) %></p>
+  <% else %>
+    <%= render :partial => deals_list_style %>
+    <span class="pagination"><%= pagination_links_full @deals_pages, @deals_count %></span>
+  <% end %>
+  </div>
+
+  <% other_formats_links do |f| %>
+      <%= f.link_to 'CSV', :url => filtered_params %>
+  <% end if User.current.allowed_to?(:export_contacts, @project, :global => true) %>
+<% end %>
+
+<% if Redmine::VERSION.to_s >= '3.4' || RedmineContacts.unstable_branch? %>
+  <%= context_menu %>
+<% else %>
+  <%= context_menu url_for( {:controller => "deals", :action => "context_menu"} ) %>
+<% end %>
+
+<% content_for :sidebar do %>
+  <%= call_hook(:view_deals_sidebar_top, :deals => @deals) %>
+  <%= render :partial => 'common/sidebar' %>
+  <%= render :partial => 'deals_statistics' %>
+  <%= render_sidebar_crm_queries('deal') %>
+  <%= call_hook(:view_deals_sidebar_after_statistics, :deals => @deals) %>
+  <%= render :partial => 'notes/last_notes', :object => @last_notes %>
+  <%= render :partial => 'common/recently_viewed' %>
+  <%= call_hook(:view_deals_sidebar_bottom, :deals => @deals) %>
+<% end unless (deals_list_style == 'list_board') %>
+
+
+<% content_for(:header_tags) do %>
+  <%= javascript_include_tag :contacts, :plugin => 'redmine_contacts'  %>
+  <%= stylesheet_link_tag :contacts_sidebar, :plugin => 'redmine_contacts' %>
+  <meta name = "format-detection" content = "telephone=no">
+<% end %>
+

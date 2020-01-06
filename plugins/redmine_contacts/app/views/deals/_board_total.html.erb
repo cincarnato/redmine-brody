@@ -1,0 +1,7 @@
+<tr>
+  <% deal_statuses.each do |deal_status| %>
+  <th style="width: <%= 100/deal_statuses.size %>%;" data-id="<%= deal_status.id %>">
+    <%=  prices_collection_by_currency(@deals_scope.group(:currency).where(:status_id => deal_status.id).sum(:price), :hide_zeros => true).join('<br/>').html_safe %>
+  </th>
+  <% end %>
+</tr>

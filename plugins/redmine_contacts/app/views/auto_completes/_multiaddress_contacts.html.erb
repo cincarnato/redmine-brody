@@ -1,0 +1,15 @@
+<%= raw @contacts.inject([]) { |collector, contact|
+    collector + contact.emails.map { |email|
+                                     {
+                                       'id' => email,
+                                       'text' => contact.name_with_company,
+                                       'name' => contact.name,
+                                       'avatar' => avatar_to(contact, size: 32, class: 'select2-contact__avatar'),
+                                       'company' => contact.is_company ? "" : contact.company.to_s,
+                                       'email' => email,
+                                       'value' => contact.id
+                                     }
+                                   }
+
+    }.to_json
+%>

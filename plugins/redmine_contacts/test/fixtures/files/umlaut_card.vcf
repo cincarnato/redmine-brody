@@ -1,0 +1,18 @@
+BEGIN:VCARD
+VERSION:2.1
+N;CHARSET=ISO-8859-1:Testovish;Test;;
+FN;CHARSET=ISO-8859-1:Test Testovish
+SORT-STRING:test
+CLASS:PUBLIC
+EMAIL;TYPE=internet;type=WORK;type=pref:t.test@test.com
+BDAY:19801201
+ADR;TYPE=work;CHARSET=ISO-8859-1:;;Bleichstraße;Düsseldorf;Nordrhein-Westfalen;11111 ;Testland
+ADR;TYPE=home;CHARSET=ISO-8859-1:;;;;;;
+TEL;TYPE=work:+11-111-111111-11111
+ORG;CHARSET=ISO-8859-1:Geschäftszweig
+TITLE;CHARSET=ISO-8859-1:Tester
+CATEGORIES;CHARSET=ISO-8859-1:Test
+PHOTO;VALUE=URL;TYPE=JPEG:http://www.test.com/test.jpg
+NOTE;CHARSET=ISO-8859-1:Test note
+PRODID:-//Apple Inc.//Mac OS X 10.8.4//EN
+END:VCARD

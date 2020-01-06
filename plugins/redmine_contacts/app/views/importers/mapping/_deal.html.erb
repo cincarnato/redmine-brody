@@ -1,0 +1,10 @@
+<%= form_tag(mapping_project_deal_import_path(:id => @import, :project => @project), :id => "import-form") do %>
+  <fieldset class="box tabular">
+    <legend><%= l(:label_fields_mapping) %></legend>
+    <div id="fields-mapping">
+      <%= render :partial => 'importers/mapping/deal_fields_mapping' %>
+    </div>
+  </fieldset>
+
+<%= render :partial => 'importers/preview' %>
+<% end %>

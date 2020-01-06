@@ -1,0 +1,71 @@
+<%= form_tag({}, :data => {:cm_url => context_menu_deals_path}) do -%>
+<%= hidden_field_tag 'back_url', url_for(params.respond_to?(:to_unsafe_hash) ? params.to_unsafe_hash : params), :id => nil %>
+<div class="autoscroll">
+<table class="list deals issues contacts">
+  <thead>
+    <tr>
+      <th class="checkbox hide-when-print">
+        <%= link_to image_tag('toggle_check.png'), {},
+                              :onclick => 'toggleCRMIssuesSelection(this); return false;',
+                              :title => "#{l(:button_check_all)}/#{l(:button_uncheck_all)}" %>
+      </th>
+      <%= sort_header_tag('id', :caption => '#', :default_order => 'desc') %>
+      <% @query.inline_columns.each do |column| %>
+        <%= Redmine::VERSION.to_s >= '3.4' || RedmineContacts.unstable_branch? ? column_header(@query, column) : column_header(column) %>
+      <% end %>
+    </tr>
+  </thead>
+  <% previous_group = false %>
+  <tbody>
+  <% @deals.each do |deal| -%>
+  <% if @query.grouped? && (group = @query.group_by_column.value(deal)) != previous_group %>
+    <% reset_cycle %>
+    <tr class="group open">
+      <td colspan="<%= @query.inline_columns.size + 2 %>">
+        <span class="expander" onclick="toggleRowGroup(this);">&nbsp;</span>
+        <%= group.blank? ? l(:label_none) : column_content(@query.group_by_column, deal) %> <span class="count"><%= @deal_count_by_group[group] %></span>
+        <%= link_to_function("#{l(:button_collapse_all)}/#{l(:button_expand_all)}",
+                             "toggleAllRowGroups(this)", :class => 'toggle-all') %>
+      </td>
+    </tr>
+    <% previous_group = group %>
+  <% end %>
+  <tr id="deal-<%= deal.id %>" class="hascontextmenu <%= cycle('odd', 'even') %>">
+    <td class="checkbox hide-when-print"><%= check_box_tag("ids[]", deal.id, false, :id => nil) %></td>
+    <td class="id"><%= link_to deal.id, deal_path(deal) %></td>
+    <%= raw @query.inline_columns.map {|column| "<td class=\"#{column.css_classes}\">#{column_content(column, deal)}</td>"}.join %>
+  </tr>
+  <% @query.block_columns.each do |column|
+       if (text = column_content(column, deal)) && text.present? -%>
+  <tr class="<%= current_cycle %>">
+    <td colspan="<%= @query.inline_columns.size + 1 %>" class="<%= column.css_classes %>"><%= text %></td>
+  </tr>
+  <% end -%>
+  <% end -%>
+  <% end -%>
+      <tr class="total">
+        <th colspan="<%= @query.inline_columns.size + 2 %>">
+          <table class="contacts deals index total">
+            <tbody>
+            <tr class="total">
+              <% if @deal_weighted_amount.map{|k, v| v.to_i > 0}.any? %>
+              <th class="title"><%= l(:label_crm_expected_revenue) %>:</th>
+              <th class="sum deals-sum">
+                <%= prices_collection_by_currency(@deal_weighted_amount, :hide_zeros => true).join('<br/>').html_safe %>
+              </th>
+              <% end %>
+              <th class="title"><%= "#{l(:label_total)} (#{@deals_count}):" %></th>
+              <th class="sum deals-sum">
+                <%= prices_collection_by_currency(@deal_amount, :hide_zeros => true).join('<br/>').html_safe %>
+              </th>
+            </tr>
+
+            </tbody>
+          </table>
+
+        </th>
+      </tr>
+  </tbody>
+</table>
+</div>
+<% end -%>

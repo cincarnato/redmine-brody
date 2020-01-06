@@ -1,0 +1,5 @@
+<div class="issue deal" data-id="<%= event.id %>">
+    <%= h("#{event.project} -") unless @project && @project == event.project %>
+    <%= link_to "#{event.price_to_s} #{event.name}", deal_path(event), :class => "icon icon-add-deal" %>
+    <span class="contact"><%= event.contact.name if event.contact %></span>
+</div>

@@ -1,0 +1,7 @@
+<tr>
+  <% deal_statuses.each do |deal_status| %>
+    <th style="width: <%= 100/deal_statuses.size %>%;">
+      <%= "#{deal_status.name} (#{@deals_scope.where(:status_id => deal_status.id).count})"%>
+    </th>
+  <% end %>
+</tr>

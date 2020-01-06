@@ -1,0 +1,24 @@
+<% if User.current.allowed_to?(:edit_deals, @issue.project) %>
+  <% @issue.build_deals_issue(:deal_id => '') if @issue.deals_issue.blank? %>
+
+  <%= form.fields_for :deals_issue do |f| %>
+    <div class="attributes">
+      <div class="splitcontent">
+        <div class="splitcontentleft">
+          <p>
+            <%= label_tag l(:label_deal), nil, for: :issue_deals_issue_attributes_deal_id %>
+            <% deal = @issue.deals_issue.deal %>
+            <%= select2_tag 'issue[deals_issue_attributes][deal_id]',
+                            options_for_select([[deal.try(:name), deal.try(:id)]], deal.try(:id)),
+                            url: auto_complete_deals_path(project_id: @issue.project),
+                            placeholder: '',
+                            style: 'width: 60%;',
+                            format_state: 'formatStateWithAvatar',
+                            allow_clear: true %>
+          </p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+<% end %>

@@ -1,0 +1,4 @@
+<p><%= form.check_box :is_filter %></p>
+<% if (@custom_field.respond_to?(:format) && @custom_field.format.searchable_supported) || !@custom_field.respond_to?(:format) %>
+<p><%= form.check_box :searchable %></p>
+<% end %>

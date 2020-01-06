@@ -1,0 +1,7 @@
+<%= select2_tag 'contact[tag_list]',
+                options_from_collection_for_select(@contact.tags, 'name', 'name', @contact.tags.map(&:name)),
+                :multiple => true,
+                :style => 'width: 95%;',
+                :url => auto_complete_contact_tags_path(:project_id => @project),
+                :placeholder => '+ add tag',
+                :tags => true %>

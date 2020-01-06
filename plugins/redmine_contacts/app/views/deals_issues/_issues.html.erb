@@ -1,0 +1,20 @@
+<div id="contact_issues" class="contact-issues">
+
+<div class="contextual">
+	<%= link_to l(:label_issue_new), new_project_issue_path(@project, :deal_id => @deal) if User.current.allowed_to?(:add_issues, @project) %>
+</div>
+
+<h3><%= @deal_issues.count > 0 ? link_to("#{l(:label_issue_plural)} (#{@deal_issues.count})", {:controller => 'issues',
+								 :action => 'index',
+								 :set_filter => 1,
+								 :f => [:deal, :status_id],
+								 :v => {:deal => [@deal.id]},
+								 :op => {:deal => '=', :status_id => '*'}}) : "#{l(:label_issue_plural)}" %> </h3>
+
+<% if @deal_issues.any? %>
+	<table style="width:100%">
+		<%= render :partial => 'contacts_issues/issue_item', :collection => @deal_issues %>
+	</table>
+<% end %>
+
+</div>

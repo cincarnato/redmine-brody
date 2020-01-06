@@ -1,0 +1,595 @@
+# Serbian translations for Redmine CRM
+# by Aleksandar Pavic
+sr-YU:
+  contacts_title: Kontakti
+
+  label_crm_recently_viewed: Nedavno gledano
+  label_crm_gravatar_enabled: Koristiti Gravater
+  label_crm_thumbnails_enabled: Prikazati rad-sliku u beleškama
+  label_crm_max_thumbnail_file_size: Maksimalna veličina slike
+  label_crm_view_all_contacts: Pregled svih kontakta
+  label_crm_background_info: Informacije o pozadini(ekrana)
+  label_crm_company: Kompanija
+  label_contact_plural: Kontakti
+  label_crm_contact_edit_information: Urediti informacije o kontaktima
+  label_crm_edit_tags: Urediti rad(deklaraciju)
+  label_crm_contact_view: Pregled
+  label_crm_contact_list: Lista
+  label_crm_contact_new: Novi kontakti
+  label_crm_at_company: u-na
+  label_crm_last_notes: Nedavne beleške
+  label_crm_tags_plural: Informacije-objašnjenje
+  label_crm_multi_tags_plural: Izabrati nekoliko objašnjenja
+  label_crm_single_tag_mode: Jedno objašnjenje
+  label_crm_multiple_tags_mode: Više objašnjenja
+  label_crm_contact_tag: Informacije-objašnjenje
+  label_crm_time_ago: pre
+  label_crm_add_note_plural: Dodati bilješku za
+  label_crm_note_plural: Beleške
+
+  label_crm_add_tags_rule: odvojeno zapetama
+  label_crm_contact_search: pretraga po imenima
+  label_crm_note_for: Beleška za
+  label_crm_show_on_map: Prikaz na mapi-papiru
+  label_crm_add_another_phone: dodati broj telefona
+  label_crm_remove: obrisati
+  label_crm_related_contacts: povezani kontaktn
+  label_crm_assigned_to: Odgovoran
+  label_crm_issue_added: Dodato zadatak
+  label_crm_add_emails_rule: odvojiti zapetama
+  label_crm_add_phones_rule: odvojiti zapetama
+  label_crm_add_employee: Novi radnik
+  label_crm_merge_duplicate_plural: Integrisati-sjediniti se
+  label_crm_duplicate_plural: Mogući duplikati
+  label_crm_duplicate_for_plural: Mogući duplikati za
+  label_crm_add_tag: + dodati objašnjenje
+
+  label_crm_note_show_extras: Napredan nivo
+  label_crm_note_hide_extras: Sakriven nivo
+  label_crm_note_added: Dodata zabeleška
+  label_crm_note_read_more: Više informacija
+  label_crm_invoice_import: Uneti račune iz CSV
+
+  label_deal_plural: Govori o
+  label_crm_contractor_plural: Kontakti
+  label_deal: Poziv
+  label_crm_deal_new: Novi poziv
+  label_crm_deal_edit_information: Urediti informacije o pozivima
+  label_crm_deal_change_status: Promeniti status
+  label_crm_statistics: Statistika
+  label_crm_deals_import: Uneti poziv iz CSV
+
+  label_crm_deal_status_new: Novi
+  label_crm_deal_status_first_contact: Prvi kontakt
+  label_crm_deal_status_negotiations: Pregovaranja
+  label_crm_deal_status_pending: za, za vreme
+  label_crm_deal_status_won: Osvojiti
+  label_crm_deal_status_lost: Izgubljeno
+
+  label_crm_created_on: Kreirati na
+
+  field_note_date: Datum zabeleške
+  field_background: Pozadina-podloga
+  field_currency: Rok trajanja-valuta
+  field_contact: Kontakt
+
+  field_deal_name: Ime
+  field_deal_background: Pozadina
+  field_deal_contact: Kontakt
+  field_deal_price: Suma
+  field_price: Suma
+
+  field_contact_avatar: ikona za kontakt
+  field_contact_is_company: Kompanija
+  field_contact_name: Ime
+  field_contact_last_name: Prezime
+  field_contact_first_name: Ime
+  field_contact_middle_name: Drugo ime
+  field_contact_job_title: Naziv posla
+  field_contact_company: Kompanija
+  field_contact_address: Adresa
+  field_contact_phone: Telfon
+  field_contact_email: Email
+  field_contact_website: Website
+  field_contact_skype: Skajp
+  field_contact_status: Status
+  field_contact_background: Pozadina
+  field_contact_tag_names: Objašnjenja-komentari
+  field_first_name: Ime
+  field_last_name: Prezime
+  field_company: Kompanija
+  field_birthday: Datum rođenja
+  field_contact_department: Odsek
+
+
+  field_company_field: Delatnost
+
+  field_color: Boja
+
+  button_add_note: Dodati zabelešku
+  notice_successful_save: Uspešno sačuvano
+  notice_successful_add: Uspešno kreirano
+  notice_unsuccessful_save: Sačuvati greške-moguće probleme
+  notice_successful_merged: Uspešno sjedinjeno
+
+  notice_merged_warning: Sve zabeleške, projekti, objašnjenja i zadaci dodeljeni ovoj osobi će biti dodati izabranoj osobi u nastavku. Kontakt će biti izbrisan.
+
+  project_module_contacts: Kontakti
+
+  permission_view_contacts: Pregled kontakta
+  permission_edit_contacts: Urediti kontakte
+  permission_delete_contacts: Izbrisati kontakte
+  permission_view_deals: Pregled razgovora
+  permission_edit_deals: Urediti razgovore
+  permission_delete_deals: Izbrisati razgovore
+  permission_add_notes: Dodati beleške
+  permission_delete_notes: Izabrati beleške
+  permission_delete_own_notes: Izabrati vlastite beleške
+
+  # 2.0.0
+  label_crm_deal_category: Kategorija poziva
+  label_crm_deal_category_plural: Kategorija poziva
+  label_crm_deal_category_new: Nova kategorija
+  text_deal_category_destroy_assignments: Premestiti-ukloniti zadatke prema kategorijama
+  text_deal_category_destroy_question: "Neki pozivi (% procenti) su dodeljeni ovoj kategoriji. Šta želite uraditi?"
+  text_deal_category_reassign_to: Preraspodeliti pozive ovoj kategoriji
+  text_deals_destroy_confirmation: 'Da li ste sigurni da žečite izbrisati ovaj poziv-e?'
+  label_crm_deal_status_plural: Statusni pozivi
+  label_crm_deal_status: Statusni poziv
+  field_deal_status_is_closed: Završeno-zatvoreno
+  label_crm_deal_status_new: Novi
+  permission_manage_contacts: Upravljanje kontaktima
+  label_crm_sales_funnel: Kanal prodaje
+  label_crm_period: Period
+  label_crm_count: Broj
+
+  #2.0.1
+  label_crm_user_format: Format imena kontakta
+  label_crm_my_contact_plural: Kontakti koji su mi dodjeljeni
+  label_crm_my_deal_plural: Pozivi dodjeljeni meni
+  label_crm_contact_view_all: Pregled svih kontakta
+  label_crm_deal_view_all: Pregled svih poziva
+
+  #2.0.2
+  label_crm_bulk_edit_selected_contacts: Izbrisati sve odabrane pozive
+  label_crm_bulk_edit_selected_deals: Urediti sve odabrane pozive
+  label_crm_bulk_send_mail_selected_contacts: Poslati mejl odabranim kontaktima
+  field_add_tags: Dodati objašnjenja
+  field_delete_tags: Izbrisati objašnjenja
+  label_crm_send_mail: Poslati mejl
+  error_empty_email: Email ne može biti prazan
+  permission_send_contacts_mail: Poslati mejl
+  field_mail_from: Adresa
+  text_email_macros: Dostupni makroi %{macro}
+  field_message: Poruka
+
+  #2.0.3
+  label_crm_add_contact: Dodati kontakt
+  label_contact: Kontakt
+  field_age: Godine
+  label_crm_vcf_import: Prebaciti iz V-kard
+  label_crm_mail_from: iz-od
+  permission_import_contacts: Uneti kontakte
+
+  #2.1.0
+  field_company_name: Ime kompanije
+  label_crm_recently_added_contacts: Nedavno dodati kontakti
+  label_crm_created_by_me: Kontakti koje sam kreirao
+  my_contacts: Moji kontakti
+  my_deals: Moji pozivi
+
+  #2.2.0
+  label_crm_note_type_email: Email
+  label_crm_note_type_call: Poziv
+  label_crm_note_type_meeting: Sastanak
+  field_deal_currency: Vrijeme trajanja
+  label_crm_my_contacts_stats: Izveštaj o kontaktima za ovaj mesec
+  label_crm_contacts_created: Kreirani kontakti
+  label_crm_deals_created: Kreirani pozivi
+  my_contacts_avatars: Slike mojih kontakta
+  my_contacts_stats: Izveštaj o kontaktima
+  label_crm_add_into: Dodati u
+  label_crm_delete_from: Izbrisati iz
+  label_crm_show_deaks_tab: Prikaz poziva
+  label_crm_show_on_projects_show: Prikaz kontakta na projektorskom pregledu
+
+  #2.2.1
+  label_crm_contacts_show_in_list: Prikazati na listi
+
+  #2.3.0
+  label_crm_module_plural: Moduli
+  label_crm_list_partial_style: Stil liste
+  label_crm_list_excerpt: Prikaz liste
+  label_crm_list_cards: Kartice
+  label_crm_list_list: Naslov
+  field_contacts: Kontakt
+  field_companies: Kompanija
+  label_crm_added_by: Dodano
+  label_crm_contact_note_authoring_time: Prikazati vrijeme
+  label_crm_contact_issues_filters: Finteri naloga
+  label_crm_csv_import: Unijeti iz CSV
+  label_crm_upload_encoding: Dekodiranje fajla
+  label_crm_csv_file: CSV fajl
+  label_crm_csv_separator: Zarez
+  field_middle_name: Drugo ime
+  field_job_title: Naziv posla
+  field_company: Kompanija
+  field_address: Adresa
+  field_phone: Telfon
+  field_email: Email
+  field_tags: Objašnjenja-komentari
+  field_last_note: Poslednje obaveštenje
+  field_is_company: je kompanija??
+  field_contact_full_name: Puno ime
+  button_contacts_edit_query: Urediti pitanja
+  button_contacts_delete_query: Izbrisati pitanja
+  permission_manage_public_contacts_queries: Upravljati pitanjima
+  permission_add_deals: Dodati pozive
+  permission_add_contacts: Dodati kontakte
+  permission_save_contacts_queries: Sačuvati pitanja
+
+  #2.3.3
+  label_crm_contact_show_in_app_menu: Prikazati prozore u meniju aplikacije
+
+  #2.3.4
+  label_crm_contact_show_closed_issues: Prikaz rešenih problema
+
+  #3.0.0
+  label_crm_import: Uneti-uvesti
+  label_contact_note_plural: Beleške o kontaktima
+  label_deal_note_plural: Beleške o pozivima
+  label_crm_contact_all_note_plural: Sve beleške
+  error_unable_delete_deal_status: Nije moguće izbrisati pozive
+  label_crm_contacts_hidden: Sakrivena podešavanja
+
+  #3.1.0
+  label_crm_contact_added: Dodati kontakti
+  label_crm_note_added: Dodato obaveštenje
+  label_crm_deal_added: Dodan poziv
+  label_crm_deal_updated: Poziv obnovljen
+  text_crm_contact_added: "Autor %{name} je dodao ime kontakta %{author}."
+  text_crm_deal_added: "Autor %{name} je dodao poziv %{author}."
+  text_crm_deal_status_changed: "Status poziva je promenjen iz %{old} u %{new}"
+  text_crm_deal_updated: "Autor je obnovio pozive %{author}."
+  label_crm_contacts_cc: CC
+  label_crm_contacts_bcc: Bcc
+  label_crm_contact_import: Uneti iz CSV
+  permission_import_deals: Uvezi dpgpvpre
+  label_crm_single_quotes: "Apostorf (')"
+  label_crm_double_quotes: Dvostruki navodnici (\")"
+  label_crm_quotes_type: Tip citiranja
+  label_crm_contacts_visibility: Vidljivost
+  label_crm_contacts_visibility_project: Vidljivost u poslovima
+  label_crm_contacts_visibility_public: Javno
+  label_crm_contacts_visibility_private: Privatno
+  permission_view_private_contacts: Pregled privatnih kontakta
+  text_crm_error_on_line: 'Greška na liniji %{line}: %{error}.'
+
+  #3.2.0
+  label_crm_probability: Verovatnoća
+  label_crm_deal_status_type: Vrsta statusa
+  label_crm_select_companies: Filteriši kompanije u dogovoru
+  label_crm_expected_revenue: Očekivani prihod
+  label_crm_deal_due_date: Datum isteka
+
+  #3.2.2
+  label_crm_show_deals_in_top_menu: Prikaz poziva u glavnom meniju
+  label_crm_show_details: Detaljnije
+  label_crm_has_deals: Poziv na čekanju
+  label_crm_has_open_issues: Poteškoće
+  label_crm_note: obaveštenja
+
+  #3.2.5
+  notice_failed_to_save_contacts: "Greška pri snimanju %{count} kontakata na %{total} selektovanih: %{ids}."
+
+  #3.2.6
+  project_module_deals: Pozivi
+  permission_manage_deals: Upravljanje pozivima
+  label_crm_deals_from_subprojects: Prikaz poziva u subprojektima
+  label_crm_megre_tags: Ujediniti
+  label_crm_monochrome_tags: Crnobeli prikaz
+
+  #3.2.7
+  label_crm_address: Adresa
+  label_crm_street1: Ulica 1
+  label_crm_street2: Ulica 2
+  label_crm_city: Grad
+  label_crm_region: 'Država'
+  label_crm_postcode: 'ZIP'
+  label_crm_country: Država
+  label_crm_countries:
+    AF: Avganistan
+    AL: Albanija
+    DZ: Algerija
+    AS: Američka Samoa
+    AD: Andora
+    AO: Angola
+    AI: Anguilla
+    AQ: Antarktika
+    AG: Antigua and Barbuda
+    AR: Argentina
+    AM: Jermenija
+    AW: Aruba
+    AU: Australija
+    AT: Austrija
+    AZ: Azerbejcan
+    BS: Bahami
+    BH: Bahrein
+    BD: Bangladeš
+    BB: Barbados
+    BY: Bjelorusija
+    BE: Belgija
+    BZ: Belice
+    BJ: Benin
+    BM: Bermuda
+    BT: Butan
+    BO: Bolivija
+    BA: Bosna i Hercegovina
+    BW: Bocvana
+    BV: Bouvet Island
+    BR: Brazil
+    BQ: Britanska Antartik teritorija
+    IO: Britanska teritiorija na Indijskom okeanu
+    VG: Britanske Djevičanska Ostrva
+    BN: Bruneja
+    BG: Bugarska
+    BF: Burkina Faso
+    BI: Burundi
+    KH: Kamboca
+    CM: Kamerun
+    CA: Kanada
+    CT: Canton and Enderbury Islands
+    CV: Cape Verde
+    KY: Kajmanska ostrva
+    CF: Centralna Afrička Republika
+    TD: Čad
+    CL: Čile
+    CN: Kina
+    CX: Christmas Island
+    CC: 'Cocos [Keeling] Islands'
+    CO: Kolumbija
+    KM: Komorač
+    CG: Kongo
+    CD: Kongo - Kinsaza
+    CK: Cook Islands
+    CR: Kostarika
+    HR: Hrvatska
+    CU: Kuba
+    CY: Kipar
+    CZ: Češka republika
+    CI: Obala Slonovače
+    DK: Danska
+    DJ: Džibuti
+    DM: Dominika
+    DO: Dominikanska republika
+    NQ: Dronning Maud Land
+    DD: Istočna Njjemačka
+    EC: Ekvador
+    EG: Egipt
+    SV: El Salvador
+    GQ: Ekvatorijalna Gvineja
+    ER: Eritreja
+    EE: Estonija
+    ET: Etiopija
+    FK: Foklandska ostrva
+    FO: Farska ostrva
+    FJ: Fidži
+    FI: Finska
+    FR: Francuska
+    GF: Francuska Gvajana
+    PF: Francuska Polinezija
+    TF: Francuske Južne teritorije
+    FQ: Južna Francuska i Antartičke teritorije
+    GA: Gabon
+    GM: Gambija
+    GE: Gruzija
+    DE: Njjemačka
+    GH: Gana
+    GI: Gibraltar
+    GR: Grčka
+    GL: Grenland
+    GD: Granada
+    GP: Gvadelupe
+    GU: Gam
+    GT: Guatemala
+    GG: Guernsey
+    GN: Gvineja
+    GW: Gvineja-Bisej
+    GY: Gvajana
+    HT: Haiti
+    HM: Heard Island and McDonald Islands
+    HN: Honduras
+    HK: Hong Kong
+    HU: Mađarska
+    IS: Island
+    IN: Indija
+    ID: Indonezija
+    IR: Iran
+    IQ: Irak
+    IE: Irska
+    IM: Isle of Man
+    IL: Izrael
+    IT: Italija
+    JM: Jamajka
+    JP: Japan
+    JE: Džersi
+    JT: Johnston Island
+    JO: Džordan
+    KZ: Kazastan
+    KE: Kenija
+    KI: Kiribati
+    KW: Kuvajt
+    KG: Kirgistan
+    LA: Laos
+    LV: Latvija
+    LB: Leban
+    LS: Lesoto
+    LR: Liberija
+    LY: Libija
+    LI: Lihtenštajn
+    LT: Litvanija
+    LU: Luksemburg
+    MO: Makao Kina
+    MK: Makedonija
+    MG: Madagaskar
+    MW: Malavi
+    MY: Malezija
+    MV: Maldivi
+    ML: Mali
+    MT: Malta
+    MH: Maršalska Ostrva
+    MQ: Martinique
+    MR: Mauritanija
+    MU: Mauricijus
+    YT: Majoti
+    FX: Metropolitanska Francuska
+    MX: Meksiko
+    FM: Mikronezija
+    MI: Midway Islands
+    MD: Moldavija
+    MC: Monako
+    MN: Mongolija
+    ME: Crna Gora
+    MS: Monserat
+    MA: Maroko
+    MZ: Mozambija
+    MM: Burma
+    NA: Nambija
+    NR: Nauru
+    NP: Nepal
+    NL: Holandija
+    AN: Netherlands Antilles
+    NT: Neutralane zone
+    NC: Nova Kaledonija
+    NZ: Novi Zeland
+    NI: Nikagara
+    NE: Niger
+    NG: Nigerija
+    NU: Niue
+    NF: Norfolk Island
+    KP: Sjeverna Koreja
+    VD: Sjeverni Vijetnam
+    MP: Sjeverna Marijanska Ostrva
+    "NO": Norveška
+    OM: Oman
+    PC: Pacifička ostrva
+    PK: Pakistan
+    PW: Palu
+    PS: Palestinske teritorije
+    PA: Panama
+    PZ: Zona Panamskog kanala
+    PG: Nova Gvineja
+    PY: Paragvaj
+    YD: Jeman
+    PE: Peru
+    PH: Filipini
+    PN: Pitcairn Islands
+    PL: Poljska
+    PT: Portugal
+    PR: Portoriko
+    QA: Katar
+    RO: Rumunija
+    RU: Rusija
+    RW: Ruanda
+    RE: Réunion
+    BL: Sveti Bartolomej
+    SH: Sveta Helena
+    KN: Saint Kitts and Nevis
+    LC: Sveta Lucija
+    MF: Sveti Martin
+    PM: Sveti Pijer i Migelon
+    VC: Sveti Vinsent
+    WS: Samoa
+    SM: San Marino
+    SA: Saudijaska Arabija
+    SN: Senegal
+    RS: Srbija
+    CS: Srbija
+    SC: Seychelles
+    SL: Sijera Leone
+    SG: Singapur
+    SK: Slovačka
+    SI: Slovenija
+    SB: Solomonska ostrva
+    SO: Somalija
+    ZA: Južna Afrika
+    GS: Južna Gruzija
+    KR: Južna Koreja
+    ES: Španija
+    LK: Šri Lanka
+    SD: Sudan
+    SR: Suriname
+    SJ: Svalbard and Jan Mayen
+    SZ: Švicarska
+    SE: Švedska
+    CH: Švajcarska
+    SY: Sirija
+    ST: São Tomé and Príncipe
+    TW: Tajvan
+    TJ: Tadžkistan
+    TZ: Tanzanija
+    TH: Tajland
+    TL: Timor-Leste
+    TG: Togo
+    TK: Tokelau
+    TO: Tonga
+    TT: Trinidad i Tobago
+    TN: Tunizija
+    TR: Turska
+    TM: Turmekistan
+    TC: Turks and Caicos Islands
+    TV: Tuvala
+    UM: U.S. Minor Outlying Islands
+    PU: U.S. Miscellaneous Pacific Islands
+    VI: Djevičanska ostrva-Sjedinjene države
+    UG: Uganda
+    UA: Ukrajina
+    AE: Ujedinjeni Emirati
+    GB: Ujedinjeno Kraljevstvo
+    US: Sjedinjene države
+    ZZ: Nepoznat ili ne postojeći region
+    UY: Urugvaj
+    UZ: Uzbekistan
+    VU: Vanutu
+    VA: Vatikan siti
+    VE: Venecuela
+    VN: Vijetnam
+    WK: Wake Island
+    WF: Wallis and Futuna
+    EH: Zapadna Sahara
+    YE: Jemen
+    ZM: Zambija
+    ZW: Zimbabve
+    AX: Åland Islands
+  label_crm_cross_project_contacts: Omogućiti projekte među povezanim kontaktima
+  label_crm_list_board: Radna površina
+  label_crm_default_list_style: Onemogućen stil liste
+  label_crm_show_in_top_menu: Prikazati u glavnom meniju
+  label_crm_show_in_app_menu: Prikazati u meniju aplikacija
+  label_crm_money_settings: Novac
+  label_crm_disable_taxes: Onemogućiti porez
+  label_crm_default_tax: Onemogućena vrednost porez
+  label_crm_tax_type: Vrsta poreza
+  label_crm_tax_type_inclusive: uključiti porez
+  label_crm_tax_type_exclusive: bez poreza
+  label_crm_default_currency: Ističe
+  label_crm_thousands_delimiter: Ograničenje do hiljadu
+  label_crm_decimal_separator: Decimalni zarez
+
+  #3.2.10
+  label_crm_add_contact_plural: Dodati kontakte
+  label_crm_search_for_contact: Pretraga kontakta
+  label_crm_major_currencies: Glavne valute
+
+  #3.2.11
+  label_crm_post_address_format: Šablon za adresu
+  label_crm_post_address_format_macros: "Address format macros: %{macros}"
+
+  #3.2.14
+  label_crm_last_year: Prošle godine
+
+  #3.2.15
+  permission_export_contacts: Uneti kontakte i pozive
+
+  #3.4.0
+  label_crm_deal_contact: Birani kontakti

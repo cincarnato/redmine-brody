@@ -1,0 +1,9 @@
+<%= raw @deals.map {|deal| {
+        'id' => deal.id,
+        'label' => "#{deal.full_name} (#{deal.info})",
+        'text' => "#{deal.name} (#{deal.info})",
+        'avatar' => avatar_to(deal, :size => 16),
+        'value' => deal.id
+      }
+    }.to_json
+%>

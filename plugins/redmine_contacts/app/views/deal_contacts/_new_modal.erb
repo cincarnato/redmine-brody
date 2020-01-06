@@ -1,0 +1,23 @@
+<h3 class="title"><%= l(:label_crm_add_contact_plural) %></h3>
+
+<%= form_tag({:controller => 'deal_contacts',
+              :action => 'add',
+              :deal_id => @deal,
+              :project_id => @project},
+             :remote => true,
+             :method => :post,
+             :id => 'add-contact-form',
+             :class => 'select-users') do |f| %>
+
+    <p><%= label_tag 'contact_search', l(:label_crm_search_for_contact) %>:<%= text_field_tag 'contact_search', nil, :placeholder => l(:label_crm_contact_search) %></p>
+    <%= javascript_tag "observeSearchfield('contact_search', 'contacts_for_issue', '#{ escape_javascript url_for(:controller => :deal_contacts, :action => :autocomplete, :deal_id => @deal, :project_id => @project) }')" %>
+
+    <div id="contacts_for_issue" >
+      <%= contacts_check_box_tags('contact_id[]', @contacts) %>
+    </div>
+
+    <p class="buttons">
+      <%= submit_tag l(:button_add), :name => nil, :onclick => "hideModal(this);" %>
+      <%= submit_tag l(:button_cancel), :name => nil, :onclick => "hideModal(this);", :type => 'button' %>
+    </p>
+<% end %>

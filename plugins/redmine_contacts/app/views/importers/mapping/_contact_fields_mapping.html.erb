@@ -1,0 +1,86 @@
+<div class="splitcontent">
+  <div class="splitcontentleft">
+    <p>
+      <label><%= l(:field_is_company) %></label>
+      <%= mapping_select_tag @import, 'is_company' %>
+    </p>
+    <p>
+      <label><%= l(:field_first_name) %></label>
+      <%= mapping_select_tag @import, 'first_name', :required => true %>
+    </p>
+    <p>
+      <label><%= l(:field_middle_name) %></label>
+      <%= mapping_select_tag @import, 'middle_name' %>
+    </p>
+    <p>
+      <label><%= l(:field_last_name) %></label>
+      <%= mapping_select_tag @import, 'last_name' %>
+    </p>
+    <p>
+      <label><%= l(:field_job_title) %></label>
+      <%= mapping_select_tag @import, 'job_title' %>
+    </p>
+    <p>
+      <label><%= l(:field_company) %></label>
+      <%= mapping_select_tag @import, 'company' %>
+    </p>
+    <p>
+      <label><%= l(:field_phone) %></label>
+      <%= mapping_select_tag @import, 'phone' %>
+    </p>
+    <p>
+      <label><%= l(:field_email) %></label>
+      <%= mapping_select_tag @import, 'email' %>
+    </p>
+    <p>
+      <label><%= l(:field_tags) %></label>
+      <%= mapping_select_tag @import, 'tag_list' %>
+    </p>
+    <% @custom_fields.each do |field| %>
+      <p>
+        <label><%= field.name %></label>
+        <%= mapping_select_tag @import, "cf_#{field.id}" %>
+      </p>
+    <% end %>
+  </div>
+
+  <div class="splitcontentright">
+    <p>
+      <label><%= l(:label_crm_address) %></label>
+      <%= mapping_select_tag @import, 'address_street' %>
+    </p>
+    <p>
+      <label><%= l(:label_crm_city) %></label>
+      <%= mapping_select_tag @import, 'address_city' %>
+    </p>
+    <p>
+      <label><%= l(:label_crm_region) %></label>
+      <%= mapping_select_tag @import, 'address_state' %>
+    </p>
+    <p>
+      <label><%= l(:label_crm_postcode) %></label>
+      <%= mapping_select_tag @import, 'address_zip' %>
+    </p>
+    <p>
+      <label><%= l(:label_crm_country_code) %></label>
+      <%= mapping_select_tag @import, 'address_country_code' %>
+    </p>
+    <p>
+      <label><%= l(:field_contact_skype) %></label>
+      <%= mapping_select_tag @import, 'skype_name' %>
+    </p>
+    <p>
+      <label><%= l(:field_contact_website) %></label>
+      <%= mapping_select_tag @import, 'website' %>
+    </p>
+    <p>
+      <label><%= l(:field_birthday) %></label>
+      <%= mapping_select_tag @import, 'birthday' %>
+    </p>
+    <p>
+      <label><%= l(:field_background) %></label>
+      <%= mapping_select_tag @import, 'background' %>
+    </p>
+  </div>
+</div>
+

@@ -1,0 +1,45 @@
+<%  if !@issue.blank? && User.current.allowed_to?(:view_contacts, @project)  %>
+
+<div id="issue_contacts">
+
+
+
+
+  <% if User.current.allowed_to?(:manage_contact_issue_relations, @project) %>
+  <div class="contextual">
+  <%= link_to l(:button_add),
+        {:controller => 'contacts_issues', :action => 'new', :issue_id => @issue},
+        :remote => true,
+        :method => 'get' %>
+  </div>
+  <% end %>
+
+
+	<h3><%= l(:label_contact_plural) %> </h3>
+
+	<ul>
+	  <% @issue.contacts.order_by_name.visible.each do |contact| %>
+		<li id="contact_<%= contact.id%>">
+		<%= contact_tag(contact) %>
+		<%= "(#{contact.job_title}) " unless contact.job_title.blank? %>
+		<% if  User.current.allowed_to?(:delete_contacts, @project) %>
+			<%= link_to(image_tag('delete.png'),
+					{   :controller => 'contacts_issues',
+								:action => 'delete',
+								:issue_id => @issue,
+								:project_id => @project,
+								:id => contact.id},
+					:remote => true,
+					:method => :delete,
+					:data => {:confirm => l(:text_are_you_sure)},
+  				 	:class  => "delete",
+	   				:title => l(:button_delete) ) %>
+
+		 <% end %>
+		 </li>
+		<% end %>
+	</ul>
+
+</div>
+
+<% end %>

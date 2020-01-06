@@ -1,0 +1,12 @@
+api.array :deal_statuses, api_meta(:total_count => @deal_statuses.count) do
+  @deal_statuses.each do |deal_status|
+    api.deal_status do
+  	  api.id deal_status.id
+      api.name deal_status.name
+      api.position deal_status.position
+  	  api.is_default deal_status.is_default
+  	  api.status_type deal_status.status_type
+  	  api.color deal_status.color
+    end
+  end
+end

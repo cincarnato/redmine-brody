@@ -1,0 +1,12 @@
+<h2><%= l(:label_crm_csv_import) %></h2>
+
+<%= form_tag(importer_link, :multipart => true, :project => @project) do %>
+  <%= error_messages_for @import %>
+  <fieldset class="box">
+    <legend><%= l(:label_select_file_to_import) %> (CSV)</legend>
+    <p>
+      <%= file_field_tag 'file' %>
+    </p>
+  </fieldset>
+  <p><%= submit_tag l(:label_next).html_safe + " &#187;".html_safe, :name => nil %></p>
+<% end %>

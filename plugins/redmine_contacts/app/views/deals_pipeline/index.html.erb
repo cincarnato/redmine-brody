@@ -1,0 +1,64 @@
+<h2><%= h l(:label_crm_sales_funnel) %></h2>
+<%= form_tag({ :controller => 'deals_pipeline', :action => 'index', :project_id => @project }, :method => :get, :id => 'query_form') do %>
+  <%= hidden_field_tag 'set_filter', '1' %>
+  <%= hidden_field_tag 'object_type', 'deal' %>
+  <div id="query_form_content" class="hide-when-print">
+    <fieldset id="filters" class="collapsible <%= @query.new_record? ? "" : "collapsed" %>">
+      <legend onclick="toggleFieldset(this);"><%= l(:label_filter_plural) %></legend>
+      <div style="<%= @query.new_record? ? "" : "display: none;" %>">
+        <%= render :partial => 'queries/filters', :locals => {:query => @query} %>
+      </div>
+    </fieldset>
+  </div>
+  <p class="buttons hide-when-print">
+    <%= link_to_function l(:button_apply), 'submit_query_form("query_form")', :class => 'icon icon-checked' %>
+    <%= link_to l(:button_clear), { :set_filter => 1, :project_id => @project }, :class => 'icon icon-reload'  %>
+    <% if @query.new_record? && User.current.allowed_to?(:save_contacts_queries, @project, :global => true) %>
+        <%= link_to_function l(:button_save),
+                             "$('#query_form').attr('action', '#{ @project ? new_project_crm_query_path(@project) : new_crm_query_path }'); submit_query_form('query_form')",
+                             :class => 'icon icon-save' %>
+
+    <% end %>
+  </p>
+<% end %>
+<% if @deal_statuses.any? %>
+  <table class="list sales-funnel">
+    <thead>
+    <tr>
+      <th><%= h l(:label_crm_deal_status) %></th>
+      <th><%= h l(:label_crm_count) %></th>
+      <th><%= h l(:label_total) %></th>
+    </tr>
+    </thead>
+
+    <% @deal_statuses.each_with_index do |deal_status, index| %>
+      <% status_scope = @processor.deals_for_status(deal_status) %>
+      <tr class="deal_status_type-<%= deal_status.status_type %>">
+        <td class="sales-funnel index_<%= deal_status.is_lost? ? 1 : index.to_s %>" style="<%= style_for_deal_status(deal_status, status_scope, index) %>">
+          <%= deal_status_tag(deal_status) %>
+        </td>
+        <td class="count">
+          <strong>
+            <%= h status_scope.size %>
+          </strong>
+        </td>
+        <td class="total">
+          <strong>
+            <%= prices(status_scope) %>
+          </strong>
+        </td>
+      </tr>
+    <% end %>
+    <tr class="total">
+      <th colspan="2" class="title" style="text-align: right;"> <%= "#{l(:label_total)} (#{@processor.count}):" %> </th>
+      <th class="sum" style="text-align: right;">
+        <%= prices(@processor.scope) %>
+      </th>
+    </tr>
+
+  </table>
+<% end %>
+
+<% content_for :header_tags do %>
+<%= javascript_include_tag 'select_list_move' %>
+<% end %>

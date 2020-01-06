@@ -1,0 +1,5 @@
+<p><%= form.check_box :is_filter %></p>
+<p><%= form.check_box :visible, :label => l(:label_crm_contacts_show_in_list) %></p>
+<% if (@custom_field.respond_to?(:format) && @custom_field.format.searchable_supported) || !@custom_field.respond_to?(:format) %>
+<p><%= form.check_box :searchable %></p>
+<% end %>
