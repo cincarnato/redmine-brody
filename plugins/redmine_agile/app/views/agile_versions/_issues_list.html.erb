@@ -1,0 +1,18 @@
+<% if issues.any? %>
+  <% @version_board = true %>
+  <% issues.each do |issue| %>
+    <%= render partial: 'agile_boards/issue_card', locals: { issue: issue } %>
+  <% end %>
+
+  <% if page %>
+    <div class="load_more">
+      <div class="pagination-wrapper">
+        <span class="pagination">
+          <%= link_to l(:label_agile_planning_board_more), load_more_project_agile_versions_path(project, version_id: version_id,
+                                                                                                          q: params[:q],
+                                                                                                          page: page), remote: true %>
+        </span>
+      </div>
+    </div>
+  <% end %>
+<% end %>

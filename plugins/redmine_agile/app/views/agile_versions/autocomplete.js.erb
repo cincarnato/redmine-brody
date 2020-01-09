@@ -1,0 +1,1 @@
+$('.no-version-issues').html('<%= escape_javascript(render partial: "issues_list", locals: { version_id: nil, project: @project, issues: @issues, page: @paginator.try(:next_page) }) %>')

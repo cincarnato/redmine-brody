@@ -1,0 +1,50 @@
+<%= form_tag({}) do -%>
+  <%= hidden_field_tag 'back_url', url_for(params.respond_to?(:to_unsafe_hash) ? params.to_unsafe_hash : params) %>
+  <%= hidden_field_tag 'project_id', @project.id if @project %>
+
+  <div class="autoscroll">
+    <div class="flash error" style="display: none;" id="agile-board-errors"></div>
+    <div class="planning-board-wrapper">
+      <div class="planning-board" data-estimated-unit="<%= estimated_unit%>">
+
+        <div class="no-version-column">
+          <div class="column-content">
+            <div class="column-header">
+              <%= text_field_tag "search", '', placeholder: l(:label_agile_no_version_issues) %>
+              <%= javascript_tag "observeIssueSearchfield('search', '#{escape_javascript autocomplete_project_agile_versions_path(@project)}');" %>
+            </div>
+            <div class="column-issues no-version-issues" data-version-id="">
+              <%= render partial: 'issues_list', locals: { version_id: nil,
+                                                           project: @project,
+                                                           issues: @no_version_issues,
+                                                           page: @paginator.try(:next_page) }  %>
+            </div>
+          </div>
+        </div>
+
+        <% @query.versions.each do |version| %>
+          <div class="version-column">
+            <div class="column-content">
+              <div class="column-header">
+                <span class="version-name"><%= version.name %></span>
+                <span class="version-estimate"></span>
+              </div>
+              <div class="column-issues version-<%= version.id %>-issues" data-version-id="<%= version.id %>">
+                <%= render partial: 'issues_list', locals: { version_id: version.id,
+                                                             project: @project,
+                                                             issues: @query.version_issues(version),
+                                                             page: @query.version_paginator(version, params).try(:next_page) } %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<%= javascript_tag do %>
+  recalculateHours();
+  $(document).ajaxSuccess(recalculateHours);
+  $('.planning-board').dragscrollable({dragSelector:'.version-column', acceptPropagatedEvent: false, allowY: false });
+<% end %>
